@@ -1,0 +1,290 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+<title>Bosh sahifaga hush kelibsiz</title>
+{% endblock title %}
+
+{% block content %}
+        <!--================Home Banner Area =================-->
+<section class="home_banner_area">
+	<div class="banner_inner d-flex align-items-center">
+		<div class="container" >
+			<div class="banner_content">
+				<h5>XUZUSIY KORXONASINING RASMIY WEB SAYTIGA HUSH KELIBSIZ!</h5>
+				<h3>FAROVON KELAJAK</h3>
+				<a class="main_btn" href="{% url 'about' %}">Batafsil..</a>
+			</div>
+		</div>
+	</div>
+</section>
+<!--================End Home Banner Area =================-->
+
+    
+        <!--================Properties Area =================-->
+<div class="container" style="margin-bottom: 45px">
+
+	<div class="main_title">
+		<h2>Our Top Rated Properties</h2>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
+	</div>
+    {% if elon %}
+    <div class="row properties_inner">
+    {% for i in elon %}
+        			<div class="col-lg-4">
+        				<div class="properties_item">
+        					<div class="pp_img">
+        						<img class="img-fluid" src="{{ i.rasm1.url }}" alt="" style="border-radius: 13px; height: 215px; width: 100%">
+        					</div>
+        					<div class="pp_content">
+        						<a href="#"><h4>Material: {{ i.metall }}</h4></a>
+        						<div class="tags">
+        							<a>Issiqxona maydoni: {{ i.m2 }}m<sup style="color: rgb(92, 87, 87);" >2</sup></a>
+                                    {% if i.eskiNarx %}
+        							<a >eski narx:  <del style="color: rgb(39, 38, 38);">{{i.eskiNarx}}</del> so'm</a>
+                                    {% endif %}	
+        							<a >Narx:  {{i.hozirgiNarx}} so'm</a>
+        						</div>
+        						<div class="pp_footer">
+        							sana: {{ i.sana|date:"d M Y" }}
+        							<a class="main_btn" href="{% url 'oneannouncement' i.id %}">Batafsil..</a>
+        						</div>
+                                <p>Joylashtirdi: {{ i.author.first_name }} {{ i.author.last_name }}</p> 
+        					</div>
+        				</div>
+        			</div>
+    {% endfor %}
+    </div>
+		
+    {% else %}
+    <h1> E'lomlar hali mavjud emas!</h1>
+    {% endif %}
+</div>
+        <!--================End Properties Area =================-->
+        <!--================Welcome Area =================-->
+<section class="welcome_area p_120">
+	<div class="container">
+		<div class="row welcome_inner">
+			<div class="col-lg-6">
+				<div class="welcome_img">
+					<img class="img-fluid" src="{% static 'img/welcome-1.jpg' %}" alt="">
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="welcome_text">
+					<h4>Welcome to SEL Center</h4>
+					<p>inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards especially in the workplace. That’s why it’s crucial that, as women, our behavior on the job is beyond reproach. inappropriate behavior is often laughed.</p>
+					<div class="row">
+						<div class="col-sm-4">
+							<div class="wel_item">
+								<i class="lnr lnr-database"></i>
+								<h4>{{posts.count}}</h4>
+								<p>postlar</p>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="wel_item">
+								<i class="lnr lnr-book"></i>
+								<h4>{{elonlar.count}}</h4>
+								<p>berilgan e'lonlar</p>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="wel_item">
+								<i class="lnr lnr-users"></i>
+								<h4>{{user.count}}</h4>
+								<p>foydalanuvchilar</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!--================End Welcome Area =================-->
+    
+        <!--================Testimonials Area =================-->
+        <section class="testimonials_area p_120">
+        	<div class="container">
+        		<div class="row testimonials_inner">
+        			<div class="col-lg-4">
+        				<div class="testi_left_text">
+        					<h4>Client’s Feedback</h4>
+        					<p>inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards especially in the workplace. That’s why it’s crucial that, as women, our behavior on the job is beyond reproach. inappropriate behavior is often laughed.</p>
+        				</div>
+        			</div>
+        			<div class="col-lg-8">
+        				<div class="testi_slider owl-carousel">
+							<div class="item">
+								<div class="testi_item">
+									<img src="{% static 'img/testimonials/testi-1.png' %}" alt="">
+									<p>It won’t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual Game, it has been achieving great heights so far as its</p>
+									<h4>Cordelia Barton</h4>
+									<h6>CEO at Google</h6>
+								</div>
+							</div>
+							<div class="item">
+								<div class="testi_item">
+									<img src="{% static 'img/testimonials/testi-2.png' %}" alt="">
+									<p>It won’t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual Game, it has been achieving great heights so far as its</p>
+									<h4>Cordelia Barton</h4>
+									<h6>CEO at Google</h6>
+								</div>
+							</div>
+							<div class="item">
+								<div class="testi_item">
+									<img src="{% static 'img/testimonials/testi-1.png' %}" alt="">
+									<p>It won’t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual Game, it has been achieving great heights so far as its</p>
+									<h4>Cordelia Barton</h4>
+									<h6>CEO at Google</h6>
+								</div>
+							</div>
+							<div class="item">
+								<div class="testi_item">
+									<img src="{% static 'img/testimonials/testi-2.png' %}" alt="">
+									<p>It won’t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual Game, it has been achieving great heights so far as its</p>
+									<h4>Cordelia Barton</h4>
+									<h6>CEO at Google</h6>
+								</div>
+							</div>
+							<div class="item">
+								<div class="testi_item">
+									<img src="{% static 'img/testimonials/testi-1.png' %}" alt="">
+									<p>It won’t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual Game, it has been achieving great heights so far as its</p>
+									<h4>Cordelia Barton</h4>
+									<h6>CEO at Google</h6>
+								</div>
+							</div>
+							<div class="item">
+								<div class="testi_item">
+									<img src="{% static 'img/testimonials/testi-2.png' %}" alt="">
+									<p>It won’t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual Game, it has been achieving great heights so far as its</p>
+									<h4>Cordelia Barton</h4>
+									<h6>CEO at Google</h6>
+								</div>
+							</div>
+						</div>
+        			</div>
+        		</div>
+        	</div>
+        </section>
+        <!--================End Testimonials Area =================-->
+        
+        <!--================Cities Area =================-->
+        <section class="cities_area p_120">
+        	<div class="container">
+        		<div class="main_title">
+        			<h2>Demandable Cities</h2>
+        			<p>We all live in an age that belongs to the young at heart. Life that is becoming extremely fast, day to day,</p>
+        		</div>
+        		<div class="row cities_inner">
+        			<div class="col-lg-3 col-md-6">
+        				<div class="cities_item">
+        					<img class="img-fluid" src="{% static 'img/cities/cities-1.jpg' %}" alt="">
+        					<a class="main_btn2" href="#">Book Now</a>
+        				</div>
+        			</div>
+        			<div class="col-lg-3 col-md-6">
+        				<div class="cities_item">
+        					<img class="img-fluid" src="{% static 'img/cities/cities-2.jpg' %}" alt="">
+        					<a class="main_btn2" href="#">Book Now</a>
+        				</div>
+        			</div>
+        			<div class="col-lg-3 col-md-6">
+        				<div class="cities_item">
+        					<img class="img-fluid" src="{% static 'img/cities/cities-3.jpg' %}" alt="">
+        					<a class="main_btn2" href="#">Book Now</a>
+        				</div>
+        			</div>
+        			<div class="col-lg-3 col-md-6">
+        				<div class="cities_item">
+        					<img class="img-fluid" src="{% static 'img/cities/cities-4.jpg' %}" alt="">
+        					<a class="main_btn2" href="#">Book Now</a>
+        				</div>
+        			</div>
+        		</div>
+        	</div>
+        </section>
+        <!--================End Cities Area =================-->
+        
+        <!--================Feature Area =================-->
+        <section class="feature_area p_120">
+        	<div class="container">
+        		<div class="main_title">
+        			<h2>Why we are the best</h2>
+        			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</p>
+        		</div>
+        		<div class="row feature_inner">
+        			<div class="col-lg-4 col-md-6">
+        				<div class="feature_item">
+        					<h4><i class="lnr lnr-user"></i>Expert Technicians</h4>
+        					<p>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</p>
+        				</div>
+        			</div>
+        			<div class="col-lg-4 col-md-6">
+        				<div class="feature_item">
+        					<h4><i class="lnr lnr-license"></i>Professional Service</h4>
+        					<p>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</p>
+        				</div>
+        			</div>
+        			<div class="col-lg-4 col-md-6">
+        				<div class="feature_item">
+        					<h4><i class="lnr lnr-phone"></i>Great Support</h4>
+        					<p>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</p>
+        				</div>
+        			</div>
+        			<div class="col-lg-4 col-md-6">
+        				<div class="feature_item">
+        					<h4><i class="lnr lnr-rocket"></i>Technical Skills</h4>
+        					<p>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</p>
+        				</div>
+        			</div>
+        			<div class="col-lg-4 col-md-6">
+        				<div class="feature_item">
+        					<h4><i class="lnr lnr-diamond"></i>Highly Recomended</h4>
+        					<p>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</p>
+        				</div>
+        			</div>
+        			<div class="col-lg-4 col-md-6">
+        				<div class="feature_item">
+        					<h4><i class="lnr lnr-bubble"></i>Positive Reviews</h4>
+        					<p>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</p>
+        				</div>
+        			</div>
+        		</div>
+        	</div>
+        </section>
+        <!--================End Feature Area =================-->
+        
+        
+        <!--================Clients Logo Area =================-->
+        <section class="clients_logo_area p_120">
+        	<div class="container">
+        		<div class="main_title">
+        			<h2>Reliable Customers</h2>
+        			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris</p>
+        		</div>
+        		<div class="clients_slider owl-carousel">
+        			<div class="item">
+        				<img src="{% static 'img/clients-logo/c-logo-1.png' %}" alt="">
+        			</div>
+        			<div class="item">
+        				<img src="{% static 'img/clients-logo/c-logo-2.png' %}" alt="">
+        			</div>
+        			<div class="item">
+        				<img src="{% static 'img/clients-logo/c-logo-3.png' %}" alt="">
+        			</div>
+        			<div class="item">
+        				<img src="{% static 'img/clients-logo/c-logo-4.png' %}" alt="">
+        			</div>
+        			<div class="item">
+        				<img src="{% static 'img/clients-logo/c-logo-5.png' %}" alt="">
+        			</div>
+        		</div>
+        	</div>
+        </section>
+        <!--================End Clients Logo Area =================-->
+
+{% endblock content %}        
+        

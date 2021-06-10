@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Bizning jamoa</title>
+{% endblock title %}
+
+
+{% block content %}   
+  <!--================Home Banner Area =================-->
+        <section class="banner_area">
+            <div class="banner_inner d-flex align-items-center">
+            	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+				<div class="container">
+					<div class="banner_content">
+						<div class="page_link">
+							<a href="index.html">Home</a>
+							<a href="contact.html">Agents</a>
+						</div>
+						<h2>Agents</h2>
+					</div>
+				</div>
+            </div>
+        </section>
+        <!--================End Home Banner Area =================-->
+		<br><br>
+        
+<div class="container">
+<form   method="POST" class="form-group" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" class="genric-btn info form-control" style="font-size: medium; margin-bottom: 20px;">E'lonni saqlash</button>
+    <a href="/properties/" class="genric-btn danger-border form-control" style="width: 100%; margin-bottom: 15px; font-size: medium;">Orqaga</a>
+
+</form>
+    </div>    
+{% endblock content %}

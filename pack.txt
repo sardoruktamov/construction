@@ -1,0 +1,10 @@
+asgiref==3.3.1
+certifi==2020.12.5
+Django==3.1.4
+mysql==0.0.2
+mysqlclient @ file:///C:/Users/Asus/Pictures/%D0%9D%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D0%B0%D0%BF%D0%BA%D0%B0/mysqlclient-1.4.6-cp38-cp38-win32.whl
+Pillow==8.0.1
+pytz==2020.5
+sentry-sdk==0.19.5
+sqlparse==0.4.1
+urllib3==1.26.2

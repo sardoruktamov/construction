@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}  
+        <!--================Home Banner Area =================-->
+        <section class="banner_area">
+            <div class="banner_inner d-flex align-items-center">
+            	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+				<div class="container">
+					<div class="banner_content">
+						<div class="page_link">
+							<a href="index.html">Home</a>
+							<a href="blog.html">Blog</a>
+							<a href="single-blog.html">Blog Details</a>
+						</div>
+						<h2>Blog Details</h2>
+					</div>
+				</div>
+            </div>
+        </section>
+        <!--================End Home Banner Area =================-->
+        
+        <!--================post yaratish qismi =================-->
+        <section class="blog_area single-post-area p_120">
+            <div class="container">
+                    <h1>Yangi post yaratish</h1>
+
+                        <form action="{% url 'blogpost' %}" method="post">
+                            {% csrf_token %}
+                            {{form.as_p}}<br>
+                            <button type="submit" class="genric-btn info form-control" style="font-size: medium; margin-bottom: 20px;">Saqlash</button>
+                        </form>
+                        
+            </div>
+        </section>
+        <!--================post yaratish qismi =================-->
+        
+{% endblock content %}

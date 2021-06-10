@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Bizning xizmatlarimizdan xabardor bo'ling</title>
+{% endblock title %}
+
+
+{% block content %}       
+        <!--================Home Banner Area =================-->
+        <section class="banner_area">
+            <div class="banner_inner d-flex align-items-center">
+            	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+				<div class="container">
+					<div class="banner_content" >
+						<div class="page_link" >
+							<a href="{% url 'index' %}" style="color: rgb(255, 255, 255);">Home</a>
+							<a href="{% url 'properties' %}" style="color: rgb(255, 255, 255);">Properties</a>
+						</div>
+						<h2 style="color: crimson;">Properties</h2>
+					</div>
+				</div>
+            </div>
+        </section>
+        <!--================End Home Banner Area =================-->
+        
+        <!--================Properties Area =================-->
+        <section class="properties_area pad_top">
+        	<div class="container" style="margin-bottom: 45px; padding-bottom: 45px">
+
+			<div class="main_title">
+				<h2>Our Top Rated Properties</h2>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
+			</div>
+			{% if announcements %}
+			<div class="row properties_inner" >
+			{% for i in announcements %}
+        			<div class="col-lg-4" style="margin-bottom: 45px;" >
+        				<div class="properties_item">
+        					<div class="pp_img">
+        						<img class="img-fluid" src="{{ i.rasm1.url }}" alt="" style="border-radius: 13px; height: 215px; width: 100%">
+        					</div>
+        					<div class="pp_content">
+        						<a href="#"><h4>Material: {{ i.metall }}</h4></a>
+        						<div class="tags">
+        							<a>Issiqxona maydoni: {{ i.m2 }}m<sup style="color: black;" >2</sup></a>
+                                    {% if i.eskiNarx %}
+        							<a >eski narx:  <del style="color: rgb(39, 38, 38);">{{i.eskiNarx}}</del> so'm</a>
+                                    {% endif %}	
+        							<a >Narx:  {{i.hozirgiNarx}} so'm</a>
+        						</div>
+        						<div class="pp_footer">
+        							sana: {{ i.sana|date:"d M Y" }}
+        							<a class="main_btn" href="{% url 'oneannouncement' i.id %}">Batafsil..</a>
+        						</div>
+								
+								Joylashtirdi:
+								 {{ i.author.first_name }} {{ i.author.last_name }}
+								
+                                <p></p> 
+								
+
+        					</div>
+        				</div>
+        			</div>
+    {% endfor %}
+		<div class="col-md-12">
+            
+            <nav class="blog-pagination justify-content-center d-flex">
+                <ul class="pagination">
+                    <li class="page-item">{% if announcements.has_previous %}
+                        <a href="?page={{announcements.previous_page_number}}" class="page-link" aria-label="Previous">
+                            <span aria-hidden="true">
+                                <span class="lnr lnr-chevron-left"></span>
+                            </span>
+                        </a>{% endif %}
+                    </li>
+                    {% for i in announcements.paginator.page_range %}
+                        {% if announcements.number == i %}
+                            <li class="page-item active" style="padding: 4px 12px; color: white; background: #f5204b"><span>{{ i }} </span></li>
+                        {% elif i > announcements.number|add:'-7' and i < announcements.number|add:'7' %}
+                        <li class="page-item "><a href="?page={{i}}" class="page-link">{{i}}</a></li>
+                        {% endif %}
+                    {% endfor %} 
+                    <li class="page-item">{% if announcements.has_next %}
+                        <a href="?page={{announcements.next_page_number}}" class="page-link" aria-label="Next">
+                            <span aria-hidden="true">
+                                <span class="lnr lnr-chevron-right"></span>
+                            </span>
+                        </a>{% endif %}
+                    </li>
+                </ul>
+            </nav>
+        </div>
+		
+    {% else %}
+    <h1> E'lomlar hali mavjud emas!</h1>
+    {% endif %}
+</div>
+        </section>
+        <!--================End Properties Area =================-->
+        
+        <!--================Feature Area =================-->
+        <section class="feature_area p_120">
+        	<div class="container">
+        		<div class="main_title">
+        			<h2>Why we are the best</h2>
+        			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</p>
+        		</div>
+        		<div class="row feature_inner">
+        			<div class="col-lg-4 col-md-6">
+        				<div class="feature_item">
+        					<h4><i class="lnr lnr-user"></i>Expert Technicians</h4>
+        					<p>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</p>
+        				</div>
+        			</div>
+        			<div class="col-lg-4 col-md-6">
+        				<div class="feature_item">
+        					<h4><i class="lnr lnr-license"></i>Professional Service</h4>
+        					<p>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</p>
+        				</div>
+        			</div>
+        			<div class="col-lg-4 col-md-6">
+        				<div class="feature_item">
+        					<h4><i class="lnr lnr-phone"></i>Great Support</h4>
+        					<p>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</p>
+        				</div>
+        			</div>
+        			<div class="col-lg-4 col-md-6">
+        				<div class="feature_item">
+        					<h4><i class="lnr lnr-rocket"></i>Technical Skills</h4>
+        					<p>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</p>
+        				</div>
+        			</div>
+        			<div class="col-lg-4 col-md-6">
+        				<div class="feature_item">
+        					<h4><i class="lnr lnr-diamond"></i>Highly Recomended</h4>
+        					<p>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</p>
+        				</div>
+        			</div>
+        			<div class="col-lg-4 col-md-6">
+        				<div class="feature_item">
+        					<h4><i class="lnr lnr-bubble"></i>Positive Reviews</h4>
+        					<p>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</p>
+        				</div>
+        			</div>
+        		</div>
+        	</div>
+        </section>
+        <!--================End Feature Area =================-->
+        
+        <!--================Cities Area =================-->
+        <section class="cities_area p_120">
+        	<div class="container">
+        		<div class="main_title">
+        			<h2>Demandable Cities</h2>
+        			<p>We all live in an age that belongs to the young at heart. Life that is becoming extremely fast, day to day,</p>
+        		</div>
+        		<div class="row cities_inner">
+        			<div class="col-lg-3">
+        				<div class="cities_item">
+        					<img class="img-fluid" src="{% static 'img/cities/cities-1.jpg' %}" alt="">
+        					<a class="main_btn2" href="#">Book Now</a>
+        				</div>
+        			</div>
+        			<div class="col-lg-3">
+        				<div class="cities_item">
+        					<img class="img-fluid" src="{% static 'img/cities/cities-2.jpg' %}" alt="">
+        					<a class="main_btn2" href="#">Book Now</a>
+        				</div>
+        			</div>
+        			<div class="col-lg-3">
+        				<div class="cities_item">
+        					<img class="img-fluid" src="{% static 'img/cities/cities-3.jpg' %}" alt="">
+        					<a class="main_btn2" href="#">Book Now</a>
+        				</div>
+        			</div>
+        			<div class="col-lg-3">
+        				<div class="cities_item">
+        					<img class="img-fluid" src="{% static 'img/cities/cities-4.jpg' %}" alt="">
+        					<a class="main_btn2" href="#">Book Now</a>
+        				</div>
+        			</div>
+        		</div>
+        	</div>
+        </section>
+        <!--================End Cities Area =================-->
+
+{% endblock content %}

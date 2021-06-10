@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>sizning ID: {{ elon.id }} bo'lgan e'loningiz</title>
+{% endblock title %}
+
+
+{% block content %}        
+        
+<div class="container">
+    <!-- ================================================ carusel -->
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{{ elon.rasm1.url }}" class="d-block w-100" style="height: 600px;"  alt="..." >
+          </div>
+          <div class="carousel-item">
+            {% if elon.rasm2 %}
+            <img src="{{ elon.rasm2.url }}" class="d-block w-100" style="height: 600px;" alt="...">
+            {% else %}
+              {% if elon.rasm3 %}
+              <img src="{{ elon.rasm3.url }}" class="d-block w-100" style="height: 600px;" alt="...">
+              {% else %}
+               <img src="{{ elon.rasm1.url }}" class="d-block w-100" style="height: 600px;"  alt="...">
+               {% endif %}
+            {% endif %}
+          </div>
+          
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <!-- ================================================  end carusel -->
+    <div class="row properties_inner">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="properties_item">
+                
+                <div class="pp_content">
+                    <a href="#"><h4>Material: {{ elon.metall }}</h4></a>
+                    <div class="tags">
+                        <a>Issiqxona maydoni: {{ elon.m2 }}m<sup style="color: black;" >2</sup></a>
+                        {% if elon.eskiNarx %}
+                        <a >eski narx:  <del style="color: rgb(39, 38, 38);">{{elon.eskiNarx}}</del> so'm</a>
+                        {% endif %}	
+                        <a >Narx:  {{elon.hozirgiNarx}} so'm</a>
+                        <a >{{elon.qushimcha}}</a>
+                    </div>
+                    <div class="pp_footer">
+                        sana: {{ elon.sana|date:"d M Y" }}  | 
+                        soat: {{ elon.vaqt }}
+                    </div>
+                    <p>Joylashtirdi: {{ elon.author.first_name }} {{ elon.author.last_name }}</p> 
+                </div>
+            
+              
+                <div class="container col-12">
+                  <div class="row" style="display: flex; align-items: center; justify-content: center;">
+                    <!-- <div style="padding-left: 20px;" > -->
+                      <button type="button" class="genric-btn info form-control" data-toggle="modal" style="width: 98%; margin-bottom: 15px; font-size: medium;" data-target="#exampleModalCenter">Bog'lanish</button>
+                      <!-- Modal -->
+                          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalCenterTitle">{{ elon.author.first_name }} {{ elon.author.last_name }} bilan bog'lanish</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="row">
+                                  <div class="col-7">
+                                    FIO: {{ elon.author.first_name }} {{ elon.author.last_name }}<br>
+                                    Email:  {{ elon.author.email }} <br>
+                                    Login:  {{ elon.author.username }} <br>
+                                  Telefon:  {{ elon.author.userdetail.mobile }}  <br>
+                                  {% if elon.author.userdetail.facebook %} Facebook: <a href="{{ elon.author.userdetail.facebook }} ">{{ elon.author.userdetail.facebook }} </a>  <br>{% endif %} 
+                                  {% if elon.author.userdetail.tiktok %} tiktok: <a href="{{ elon.author.userdetail.tiktok }}">{{ elon.author.userdetail.tiktok }}</a>  <br>{% endif %} 
+                                  {% if elon.author.userdetail.instagram %} instagram: <a href="{{ elon.author.userdetail.instagram }}"> {{ elon.author.userdetail.instagram }} </a> <br>{% endif %} 
+                                  {% if elon.author.userdetail.telegram %} telegram: <a href="{{ elon.author.userdetail.telegram }}"> {{ elon.author.userdetail.telegram }} </a> <br>{% endif %} 
+                                  </div>
+                                  <div class="col-5">
+                                    <img src="{{elon.author.userdetail.image.url}}" alt="" width="70%" style="box-shadow: 5px 5px 5px; border-radius: 5px;">
+                                  </div>
+                                </div>
+                                </div>
+                                <div class="modal-footer">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                      {% if elon.author == request.user or request.user.is_superuser %}
+                      <a href="{% url 'edit_announcement' elon.id %}" class="genric-btn success-border form-control" style="width: 98%; margin-bottom: 15px; font-size: medium;">O'zgartirish</a>
+                      
+                      <button type="button" class="genric-btn danger form-control" style="width: 98%; font-size: medium;  margin-bottom: 15px;" data-toggle="modal" data-target="#exampleModal">O'chirish</button>
+                      
+                    <!-- Button trigger modal -->
+                      <!-- Modal -->
+                      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Haqiqattan ham ushbu e'lonni o'chirmoqchimisiz?</h5>
+                            </div>  
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Bekor qilish</button>
+                              <form action="{% url 'delete_announcement' elon.id %}" method="post" >
+                              {% csrf_token %}
+                              <button  class="btn btn-danger">O'chirish</button>
+                              </form>
+                            </div>
+                          </div>
+                      </div>
+                    <!-- </div> -->
+                  </div>
+                </div>
+              {% endif %}
+      </div>
+      </div>
+    </div>
+</div>
+
+
+<section class="button-area">
+  <div class="container border-top-generic">
+    <div class="button-group-area">
+      <a href="#" class="genric-btn success">Success</a>
+      <a href="#" class="genric-btn danger">Danger</a>
+    </div>
+    <div class="button-group-area mt-10">
+      <a href="#" class="genric-btn success-border">Success</a>
+      <a href="#" class="genric-btn default-border">Default</a>
+      <a href="#" class="genric-btn primary-border">Primary</a>
+      <a href="#" class="genric-btn info-border">Info</a>
+      <a href="#" class="genric-btn warning-border">Warning</a>
+      <a href="#" class="genric-btn danger-border">Danger</a>
+      <a href="#" class="genric-btn link-border">Link</a>
+      <a href="#" class="genric-btn disable">Disable</a>
+    </div>
+    <div class="button-group-area mt-40">
+      <a href="#" class="genric-btn default radius">Default</a>
+      <a href="#" class="genric-btn primary radius">Primary</a>
+      <a href="#" class="genric-btn success radius">Success</a>
+      <a href="#" class="genric-btn info radius">Info</a>
+      <a href="#" class="genric-btn warning radius">Warning</a>
+      <a href="#" class="genric-btn danger radius">Danger</a>
+      <a href="#" class="genric-btn link radius">Link</a>
+      <a href="#" class="genric-btn disable radius">Disable</a>
+    </div>
+    <div class="button-group-area mt-10">
+      <a href="#" class="genric-btn default-border radius">Default</a>
+      <a href="#" class="genric-btn primary-border radius">Primary</a>
+      <a href="#" class="genric-btn success-border radius">Success</a>
+      <a href="#" class="genric-btn info-border radius">Info</a>
+      <a href="#" class="genric-btn warning-border radius">Warning</a>
+      <a href="#" class="genric-btn danger-border radius">Danger</a>
+      <a href="#" class="genric-btn link-border radius">Link</a>
+      <a href="#" class="genric-btn disable radius">Disable</a>
+    </div>
+    <div class="button-group-area mt-40">
+      <a href="#" class="genric-btn default circle">Default</a>
+      <a href="#" class="genric-btn primary circle">Primary</a>
+      <a href="#" class="genric-btn success circle">Success</a>
+      <a href="#" class="genric-btn info circle">Info</a>
+      <a href="#" class="genric-btn warning circle">Warning</a>
+      <a href="#" class="genric-btn danger circle">Danger</a>
+      <a href="#" class="genric-btn link circle">Link</a>
+      <a href="#" class="genric-btn disable circle">Disable</a>
+    </div>
+    <div class="button-group-area mt-10">
+      <a href="#" class="genric-btn default-border circle">Default</a>
+      <a href="#" class="genric-btn primary-border circle">Primary</a>
+      <a href="#" class="genric-btn success-border circle">Success</a>
+      <a href="#" class="genric-btn info-border circle">Info</a>
+      <a href="#" class="genric-btn warning-border circle">Warning</a>
+      <a href="#" class="genric-btn danger-border circle">Danger</a>
+      <a href="#" class="genric-btn link-border circle">Link</a>
+      <a href="#" class="genric-btn disable circle">Disable</a>
+    </div>
+    <div class="button-group-area mt-40">
+      <a href="#" class="genric-btn default circle arrow">Default<span class="lnr lnr-arrow-right"></span></a>
+      <a href="#" class="genric-btn primary circle arrow">Primary<span class="lnr lnr-arrow-right"></span></a>
+      <a href="#" class="genric-btn success circle arrow">Success<span class="lnr lnr-arrow-right"></span></a>
+      <a href="#" class="genric-btn info circle arrow">Info<span class="lnr lnr-arrow-right"></span></a>
+      <a href="#" class="genric-btn warning circle arrow">Warning<span class="lnr lnr-arrow-right"></span></a>
+      <a href="#" class="genric-btn danger circle arrow">Danger<span class="lnr lnr-arrow-right"></span></a>
+    </div>
+    <div class="button-group-area mt-10">
+      <a href="#" class="genric-btn default-border circle arrow">Default<span class="lnr lnr-arrow-right"></span></a>
+      <a href="#" class="genric-btn primary-border circle arrow">Primary<span class="lnr lnr-arrow-right"></span></a>
+      <a href="#" class="genric-btn success-border circle arrow">Success<span class="lnr lnr-arrow-right"></span></a>
+      <a href="#" class="genric-btn info-border circle arrow">Info<span class="lnr lnr-arrow-right"></span></a>
+      <a href="#" class="genric-btn warning-border circle arrow">Warning<span class="lnr lnr-arrow-right"></span></a>
+      <a href="#" class="genric-btn danger-border circle arrow">Danger<span class="lnr lnr-arrow-right"></span></a>
+    </div>
+    <div class="button-group-area mt-40">
+      <a href="#" class="genric-btn primary e-large">Extra Large</a>
+      <a href="#" class="genric-btn success large">Large</a>
+      <a href="#" class="genric-btn primary">Default</a>
+      <a href="#" class="genric-btn success medium">Medium</a>
+      <a href="#" class="genric-btn primary small">Small</a>
+    </div>
+    <div class="button-group-area mt-10">
+      <a href="#" class="genric-btn primary-border e-large">Extra Large</a>
+      <a href="#" class="genric-btn success-border large">Large</a>
+      <a href="#" class="genric-btn primary-border">Default</a>
+      <a href="#" class="genric-btn success-border medium">Medium</a>
+      <a href="#" class="genric-btn primary-border small">Small</a>
+    </div>
+  </div>
+</section>
+        <!--================Team Area =================-->
+
+{% endblock %}
