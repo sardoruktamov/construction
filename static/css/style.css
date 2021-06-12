@@ -38,6 +38,9 @@ Table of Content:
 
 =====================================================================*/
 
+#navbarSupportedContent ul li a{
+  font-family: 'Roboto Condensed', sans-serif;
+}
 #comment_body{
   display: flex;
   align-items:flex-start;
@@ -3860,10 +3863,10 @@ h6 {
 /* Testimonials Area css
 ============================================================================================ */
 .testimonials_area {
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(100%, rgba(0, 0, 0, 0.75)), to(rgba(0, 0, 0, 0.75))), url("../img/testimonials/testi-bg.jpg") no-repeat scroll center center;
-  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.75) 100%, rgba(0, 0, 0, 0.75) 100%), url("../img/testimonials/testi-bg.jpg") no-repeat scroll center center;
-  background: -o-linear-gradient(rgba(0, 0, 0, 0.75) 100%, rgba(0, 0, 0, 0.75) 100%), url("../img/testimonials/testi-bg.jpg") no-repeat scroll center center;
-  background: linear-gradient(rgba(0, 0, 0, 0.75) 100%, rgba(0, 0, 0, 0.75) 100%), url("../img/testimonials/testi-bg.jpg") no-repeat scroll center center;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(100%, rgba(0, 0, 0, 0.75)), to(rgba(0, 0, 0, 0.75))), url("../img/testimonials/testi-bg1.jpg") no-repeat scroll center center;
+  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.75) 100%, rgba(0, 0, 0, 0.75) 100%), url("../img/testimonials/testi-bg1.jpg") no-repeat scroll center center;
+  background: -o-linear-gradient(rgba(0, 0, 0, 0.75) 100%, rgba(0, 0, 0, 0.75) 100%), url("../img/testimonials/testi-bg1.jpg") no-repeat scroll center center;
+  background: linear-gradient(rgba(0, 0, 0, 0.75) 100%, rgba(0, 0, 0, 0.75) 100%), url("../img/testimonials/testi-bg1.jpg") no-repeat scroll center center;
   background-size: cover;
 }
 

@@ -12,7 +12,7 @@
 		<div class="container" >
 			<div class="banner_content">
 				<h5 style="text-shadow: 0px 2px 2px red;">XUSUSIY KORXONASINING RASMIY WEB SAYTIGA HUSH KELIBSIZ!</h5>
-				<h3>FAROVON KELAJAK</h3>
+				<h3 style="text-shadow: 0px 1px 5px white;">FAROVON KELAJAK</h3>
 				<a class="main_btn" href="{% url 'about' %}">Batafsil..</a>
 			</div>
 		</div>
@@ -77,18 +77,19 @@
 					tomonidan 2018-yil 16-iyulda 622572-reestr raqam bilan davlat ro'yxatidan o'tgan.<br>
 					Korxona raxbari: Sotiboldiyev Erkinjon Abdurashid o'g'li</p>
 					<div class="row">
+						
 						<div class="col-sm-4">
 							<div class="wel_item">
 								<i class="lnr lnr-database"></i>
 								<h4>{{posts.count}}</h4>
-								<p>postlar</p>
+								<a href="{% url 'blogpost' %}"> <p>postlar</p></a>
 							</div>
 						</div>
 						<div class="col-sm-4">
 							<div class="wel_item">
 								<i class="lnr lnr-book"></i>
 								<h4>{{elonlar.count}}</h4>
-								<p>berilgan e'lonlar</p>
+								<a href="{% url 'properties' %}"><p>berilgan e'lonlar</p></a>
 							</div>
 						</div>
 						<div class="col-sm-4">
@@ -112,60 +113,25 @@
         		<div class="row testimonials_inner">
         			<div class="col-lg-4">
         				<div class="testi_left_text">
-        					<h4>Client’s Feedback</h4>
-        					<p>inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards especially in the workplace. That’s why it’s crucial that, as women, our behavior on the job is beyond reproach. inappropriate behavior is often laughed.</p>
+        					<h4>Bizning jamoa</h4>
+        					<p></p>
         				</div>
         			</div>
         			<div class="col-lg-8">
         				<div class="testi_slider owl-carousel">
+							{% for i in user %}
+							{% if i.is_staff %}
 							<div class="item">
 								<div class="testi_item">
-									<img src="{% static 'img/testimonials/testi-1.png' %}" alt="">
-									<p>It won’t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual Game, it has been achieving great heights so far as its</p>
-									<h4>Cordelia Barton</h4>
-									<h6>CEO at Google</h6>
+									<img src="{{i.userdetail.image.url}}" height="55px" alt="">
+									<h4>{{ i.first_name }} {{ i.last_name}}</h4>
+									<h6>Tel: {{ i.userdetail.mobile }}</h6>
+									<p>Manzil: {{i.userdetail.manzil}}</p>
 								</div>
 							</div>
-							<div class="item">
-								<div class="testi_item">
-									<img src="{% static 'img/testimonials/testi-2.png' %}" alt="">
-									<p>It won’t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual Game, it has been achieving great heights so far as its</p>
-									<h4>Cordelia Barton</h4>
-									<h6>CEO at Google</h6>
-								</div>
-							</div>
-							<div class="item">
-								<div class="testi_item">
-									<img src="{% static 'img/testimonials/testi-1.png' %}" alt="">
-									<p>It won’t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual Game, it has been achieving great heights so far as its</p>
-									<h4>Cordelia Barton</h4>
-									<h6>CEO at Google</h6>
-								</div>
-							</div>
-							<div class="item">
-								<div class="testi_item">
-									<img src="{% static 'img/testimonials/testi-2.png' %}" alt="">
-									<p>It won’t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual Game, it has been achieving great heights so far as its</p>
-									<h4>Cordelia Barton</h4>
-									<h6>CEO at Google</h6>
-								</div>
-							</div>
-							<div class="item">
-								<div class="testi_item">
-									<img src="{% static 'img/testimonials/testi-1.png' %}" alt="">
-									<p>It won’t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual Game, it has been achieving great heights so far as its</p>
-									<h4>Cordelia Barton</h4>
-									<h6>CEO at Google</h6>
-								</div>
-							</div>
-							<div class="item">
-								<div class="testi_item">
-									<img src="{% static 'img/testimonials/testi-2.png' %}" alt="">
-									<p>It won’t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual Game, it has been achieving great heights so far as its</p>
-									<h4>Cordelia Barton</h4>
-									<h6>CEO at Google</h6>
-								</div>
-							</div>
+							{% endif%}
+							{% endfor%}
+							
 						</div>
         			</div>
         		</div>
