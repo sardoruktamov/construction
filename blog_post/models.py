@@ -9,7 +9,7 @@ from django.urls import reverse
 from ckeditor_uploader.fields import RichTextUploadingField
 
 class Post_categories(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, db_index=True)
 
     class Meta:
         verbose_name = 'kategoriya'
@@ -28,7 +28,7 @@ class Post(models.Model):
     text_body2 = RichTextUploadingField(blank=True)
     date      = models.DateField(default=datetime.now(), blank=True) 
     time      = models.TimeField(auto_now_add=True, verbose_name='vaqt')
-    slug      = models.SlugField(unique=True, max_length=100,default='post-' )
+    slug      = models.SlugField(unique=True, max_length=300)
     tags      = TaggableManager()
     hit_count_generic = GenericRelation(HitCount, object_id_field='object_pk',
      related_query_name='hit_count_generic_relation')
