@@ -26,50 +26,53 @@
         <!--================End Home Banner Area =================-->
         
         <!--================Welcome Area =================-->
-        <section class="welcome_area p_120">
-        	<div class="container">
-        		<div class="row welcome_inner">
-        			<div class="col-lg-6">
-        				<div class="welcome_img">
-        					<img class="img-fluid" src="{% static 'img/welcome-1.jpg' %}" alt="">
-        				</div>
-        			</div>
-        			<div class="col-lg-6">
-        				<div class="welcome_text">
-        					<h4>Welcome to SEL Center</h4>
-        					<p>inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards especially in the workplace. That’s why it’s crucial that, as women, our behavior on the job is beyond reproach. inappropriate behavior is often laughed.</p>
-        					<div class="row">
-        						<div class="col-sm-4">
-        							<div class="wel_item">
-        								<i class="lnr lnr-database"></i>
-        								<h4>$2.5M</h4>
-        								<p>Total Donation</p>
-        							</div>
-        						</div>
-        						<div class="col-sm-4">
+<section class="welcome_area p_120">
+	<div class="container">
+		<div class="row welcome_inner">
+			<div class="col-lg-6">
+				<div class="welcome_img">
+					<img class="img-fluid" src="{% static 'img\about.jpg' %}" alt="">
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="welcome_text">
+					<h4>"Farovon kelajak" xususiy korxonasi</h4>
+					<p>Farg'ona viloyati Rishton tuman Davlat xizmatlari markazi 
+					tomonidan 2018-yil 16-iyulda 622572-reestr raqam bilan davlat ro'yxatidan o'tgan.<br>
+					Korxona raxbari: Sotiboldiyev Erkinjon Abdurashid o'g'li</p>
+					<div class="row">
+						
+						<div class="col-sm-4">
+							<div class="wel_item">
+								<i class="lnr lnr-database"></i>
+								<h4>{{posts.count}}</h4>
+								<a href="{% url 'blogpost' %}"> <p>postlar</p></a>
+							</div>
+						</div>
+						<div class="col-sm-4">
 							<div class="wel_item">
 								<i class="lnr lnr-book"></i>
 								<h4>{{elonlar.count}}</h4>
-								<p>berilgan e'lonlar</p>
+								<a href="{% url 'properties' %}"><p>berilgan e'lonlar</p></a>
 							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="wel_item">
+								<i class="lnr lnr-users"></i>
+								<h4>{{user.count}}</h4>
+								<p>foydalanuvchilar</p>
 							</div>
-							<div class="col-sm-4">
-								<div class="wel_item">
-									<i class="lnr lnr-users"></i>
-									<h4>{{user.count}}</h4>
-									<p>foydalanuvchilar</p>
-								</div>
-							</div>
-        					</div>
-        				</div>
-        			</div>
-        		</div>
-        	</div>
-        </section>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
         <!--================End Welcome Area =================-->
         
         <!--================Feature Area =================-->
-        <section class="feature_area p_120">
+        {% comment %} <section class="feature_area p_120">
         	<div class="container">
         		<div class="main_title">
         			<h2>Why we are the best</h2>
@@ -79,7 +82,7 @@
         			<div class="col-lg-4 col-sm-6">
         				<div class="feature_item">
         					<h4><i class="lnr lnr-user"></i>Expert Technicians</h4>
-        					<p>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</p>
+        					<p>Usage </p>
         				</div>
         			</div>
         			<div class="col-lg-4 col-sm-6">
@@ -114,69 +117,34 @@
         			</div>
         		</div>
         	</div>
-        </section>
+        </section> {% endcomment %}
         <!--================End Feature Area =================-->
         
         <!--================Testimonials Area =================-->
-        <section class="testimonials_area p_120">
+        <section class="testimonials_area p_120 mb-5">
         	<div class="container">
         		<div class="row testimonials_inner">
         			<div class="col-lg-4">
         				<div class="testi_left_text">
-        					<h4>Client’s Feedback</h4>
-        					<p>inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards especially in the workplace. That’s why it’s crucial that, as women, our behavior on the job is beyond reproach. inappropriate behavior is often laughed.</p>
+        					<h4>Bizning jamoa</h4>
+        					<p></p>
         				</div>
         			</div>
         			<div class="col-lg-8">
         				<div class="testi_slider owl-carousel">
+							{% for i in user %}
+							{% if i.is_staff %}
 							<div class="item">
 								<div class="testi_item">
-									<img src="{% static 'img/testimonials/testi-1.png' %}" alt="">
-									<p>It won’t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual Game, it has been achieving great heights so far as its</p>
-									<h4>Cordelia Barton</h4>
-									<h6>CEO at Google</h6>
+									<img src="{{i.userdetail.image.url}}" height="55px" alt="">
+									<h4>{{ i.first_name }} {{ i.last_name}}</h4>
+									<h6>Tel: {{ i.userdetail.mobile }}</h6>
+									<p>Manzil: {{i.userdetail.manzil}}</p>
 								</div>
 							</div>
-							<div class="item">
-								<div class="testi_item">
-									<img src="{% static 'img/testimonials/testi-2.png' %}" alt="">
-									<p>It won’t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual Game, it has been achieving great heights so far as its</p>
-									<h4>Cordelia Barton</h4>
-									<h6>CEO at Google</h6>
-								</div>
-							</div>
-							<div class="item">
-								<div class="testi_item">
-									<img src="{% static 'img/testimonials/testi-1.png' %}" alt="">
-									<p>It won’t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual Game, it has been achieving great heights so far as its</p>
-									<h4>Cordelia Barton</h4>
-									<h6>CEO at Google</h6>
-								</div>
-							</div>
-							<div class="item">
-								<div class="testi_item">
-									<img src="{% static 'img/testimonials/testi-2.png' %}" alt="">
-									<p>It won’t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual Game, it has been achieving great heights so far as its</p>
-									<h4>Cordelia Barton</h4>
-									<h6>CEO at Google</h6>
-								</div>
-							</div>
-							<div class="item">
-								<div class="testi_item">
-									<img src="{% static 'img/testimonials/testi-1.png' %}" alt="">
-									<p>It won’t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual Game, it has been achieving great heights so far as its</p>
-									<h4>Cordelia Barton</h4>
-									<h6>CEO at Google</h6>
-								</div>
-							</div>
-							<div class="item">
-								<div class="testi_item">
-									<img src="{% static 'img/testimonials/testi-2.png' %}" alt="">
-									<p>It won’t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual Game, it has been achieving great heights so far as its</p>
-									<h4>Cordelia Barton</h4>
-									<h6>CEO at Google</h6>
-								</div>
-							</div>
+							{% endif%}
+							{% endfor%}
+							
 						</div>
         			</div>
         		</div>
@@ -185,7 +153,7 @@
         <!--================End Testimonials Area =================-->
         
         <!--================Clients Logo Area =================-->
-        <section class="clients_logo_area p_120">
+        {% comment %} <section class="clients_logo_area p_120">
         	<div class="container">
         		<div class="main_title">
         			<h2>Reliable Customers</h2>
@@ -209,7 +177,7 @@
         			</div>
         		</div>
         	</div>
-        </section>
+        </section> {% endcomment %}
         <!--================End Clients Logo Area =================-->
         
 {% endblock content %}

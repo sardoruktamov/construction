@@ -13,9 +13,9 @@
             	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
 				<div class="container">
 					<div class="blog_b_text text-center">
-						<h2>Dude You’re Getting <br /> a Telescope</h2>
-						<p>There is a moment in the life of any aspiring astronomer that it is time to buy that first</p>
-						<a class="white_bg_btn" href="#">View More</a>
+						<h2>Farovon kelajagingizni <br />biz bilan ta'minlang</h2>
+						<p></p>
+						{% comment %} <a class="white_bg_btn" href="#">View More</a> {% endcomment %}
 					</div>
 				</div>
             </div>
@@ -160,7 +160,7 @@
                                 <div class="media post_item">
                                         <img src="{{ post.post_img.url }}" width="100px" alt="post">
                                         <div class="media-body">
-                                            <a href="#"><h3>{{ post.title | safe | truncatechars:50 }}</h3></a>
+                                            <a href="{% url 'blog-detail' post.slug %}"><h3>{{ post.title | safe | truncatechars:50 }}</h3></a>
                                             <p>{{post.date|date:"d M Y"}}</p>
                                         </div>
                                     </div>

@@ -19,12 +19,13 @@ def index(request):
     posts = Post.objects.all()
     elonlar = Elon.objects.all()
     elon = Elon.objects.order_by('-sana','-vaqt')[:3]
-    return render(request, 'index.html', {
-                                            'elon':elon,    
-                                            'user':user,
-                                            'elonlar':elonlar,
-                                            'posts':posts
-                                            })
+    context = {
+                'elon':elon,    
+                'user':user,
+                'elonlar':elonlar,
+                'posts':posts
+                }
+    return render(request, 'index.html', context)
 
 def agents(request):
     users = User.objects.all()
@@ -174,7 +175,13 @@ def delete_announcement(request, blog_id):
 def about(request):
     user = User.objects.all()
     elonlar = Elon.objects.all()
-    return render(request, 'about-us.html', {'user':user,'elonlar':elonlar})
+    posts = Post.objects.all()
+    context = {
+        'user':user,
+        'elonlar':elonlar,
+        'posts':posts
+        }
+    return render(request, 'about-us.html', context)
 
 def properties(request):
     elonlar = Elon.objects.all().order_by('-sana','-vaqt')
