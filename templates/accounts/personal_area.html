@@ -21,6 +21,8 @@
         <!-- main css -->
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+        
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
     </head>
     <body>
         {% url 'index' as index %}
@@ -46,40 +48,47 @@
 						</button>
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-							<ul class="nav navbar-nav menu_nav ml-auto">
-								<li class="nav-item {% if request.path == index %} active {% endif %}"><a class="nav-link" href="{% url 'index' %}">bosh sahifa</a></li> 
-								<li class="nav-item {% if request.path == about %} active {% endif %}"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+							<ul class="nav navbar-nav ml-auto" >
+
+                                <li class="nav-item {% if request.path == index %} active {% endif %}" >
+                                    <a class="nav-link" href="{% url 'index' %}" >bosh sahifa</a></li> 
+                                
+								<li class="nav-item {% if request.path == about %} active {% endif %}"><a class="nav-link" href="{% url 'about' %}">biz haqimizda</a></li>
 								<li class="nav-item {% if request.path == properties %} active {% endif %}"><a class="nav-link" href="{% url 'properties' %}">Barcha e'lonlar</a></li>
 								<li class="nav-item {% if request.path == agents %} active {% endif %}"><a class="nav-link" href="{% url 'agents' %}">bizning jamoa</a></li>
+                                {% if request.user.is_authenticated %}
                                   
-                                <li class="nav-item submenu dropdown active ">
-									<a href="personal" class="nav-link dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shaxsiy</a>
+                                <li class="nav-item submenu dropdown  {% if request.path == elements %} active {% endif %}">
+									<a href="#contact" class="nav-link dropdown-toggle active  {% if request.path == elements %} active {% endif %}" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{request.user.username}}</a>
 									<ul class="dropdown-menu  {% if request.path == elements %} active {% endif %}">
-                                        <li class="nav-item"><a class="nav-link" href="{{user.username}}">mening e'lonlarim</a></li>
-										<li class="nav-item  {% if request.path == elements %} active {% endif %}"><a class="nav-link" href="{{user.username}}add_announcement">E'lon berish</a></li>
+                                        {% if request.user.is_staff %}
+                                        <li class="nav-item active"><a class="nav-link" href="../../{{request.user.username}}">mening e'lonlarim</a></li>
+										<li class="nav-item  {% if request.path == elements %} active {% endif %}"><a class="nav-link" href="../../{{request.user.username}}/add_announcement">E'lon berish</a></li>
+                                        {% comment %} <li class="nav-item active"><a class="nav-link" href="{% url 'post_new' %}">Post qoldirish</a></li> {% endcomment %}
+										{% endif %}
                                         <li class="nav-item  {% if request.path == elements %} active {% endif %}"><a class="nav-link" href="{% url 'profile' %}">Shaxsiy sahifa</a></li>
 									</ul>
                                 </li> 
                                 
-								<li class="nav-item {% if request.path == blog  %} active {% endif %}"><a class="nav-link" href="{% url 'blogpost' %}">Blog</a></li>
-								<li class="nav-item {% if request.path == contact %} active {% endif %}"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
+                                {% endif %}
+                                 
+								<li class="nav-item {% if request.path == blogs  %} active {% endif %}"><a class="nav-link" href="{% url 'blogpost' %}">Blog</a></li>
+								
+								<li class="nav-item {% if request.path == contact %} active {% endif %}"><a class="nav-link" href="{% url 'contact' %}">Aloqa</a></li>
+                                {% if  request.user.is_authenticated %}
+                                <li class="nav-item "><a class="nav-link" href="{% url 'logout' %}">chiqish</a></li>
                                 
-								<!-- <li class="nav-item "><a class="nav-link" href="logout">logout</a></li> -->
-                                <form action="{% url 'logout' %}" method="post">
-                                        <li class="nav-item">
-                                        {% csrf_token %}
-                                        <button type="submit" style="border: none; width: 100%; text-align: left; background: none; cursor: pointer; " class="nav-link" >chiqish</button>
-                                    </li>
-                                </form>
-							</ul>
-							<ul class="nav navbar-nav navbar-right">
-								<li class="nav-item"><a href="#" class="search"><i class="lnr lnr-magnifier"></i></a></li>
+                                {% else %}
+								<li class="nav-item {% if request.path == sign_up %} active {% endif %}"><a class="nav-link" href="{% url 'sign_up' %}">Ro'yxatdan o'tish</a></li>
+								<li class="nav-item {% if request.path == sign_in %} active {% endif %}"><a class="nav-link" href="{% url 'sign_in' %}">kirish</a></li>
+                                
+                                {% endif %}
 							</ul>
 						</div> 
 					</div>
             	</nav>
             </div>
-        </header> 
+        </header>
         <!--================Header Menu Area =================-->
        <!--================Properties Area =================-->
 
