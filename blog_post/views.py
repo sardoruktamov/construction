@@ -12,7 +12,8 @@ from django.db.models import Q
 
 
 def blog(request):
-    posts = Post.objects.all()[:5]
+    posts = Post.objects.all()[:5]      # section qismiga ma`lumot chiqarish uchun
+    all_posts = Post.objects.all()[:5] #popular pos bo'limiga ma'lumot chiqarish uchun ikkimarta ikki xil o'zgaruvchi qilib olindi
     common_tags = Post.tags.most_common()[:12]
     categories = Post_categories.objects.all()    
     pgn = Paginator(posts, 3)
@@ -22,14 +23,21 @@ def blog(request):
         page = pgn.page(page_nums)
     except EmptyPage:
         page = pgn.page(1)
-    return render(request, 'blog.html', {'posts':page,'common_tags':common_tags,'categories':categories,})
+    
+    context = {
+        'posts':page,
+        'common_tags':common_tags,
+        'categories':categories,
+        'all_posts':all_posts
+        }
+    return render(request, 'blog.html', context)
 
 
 def search(request):
-    posts = Post.objects.all()[:5]
+    all_posts = Post.objects.all()[:5]
     common_tags = Post.tags.most_common()[:12]
 
-    categories = Post_categories.objects.all()
+    all_categories = Post_categories.objects.all()
     search_post = request.GET.get('search') 
     if search_post:
         posts = Post.objects.filter(Q(title__icontains=search_post) | Q(text_body1__icontains=search_post) | Q(text_body2__icontains=search_post))
@@ -43,7 +51,14 @@ def search(request):
         page = pgn.page(page_nums)
     except EmptyPage:
         page = pgn.page(1)
-    return render(request, 'blog.html', {'posts':page,'common_tags':common_tags,'categories':categories})
+    
+    context =  {
+        'posts':page,
+        'common_tags':common_tags,
+        'categories':all_categories,
+        'all_posts':all_posts
+        }
+    return render(request, 'blog.html', context)
 
 
 def tagged(request, slug):
@@ -51,6 +66,7 @@ def tagged(request, slug):
     
     categories = Post_categories.objects.all()
     common_tags = Post.tags.most_common()[:12]
+    all_posts = Post.objects.all()[:5]
     # postlarni tag lar bilan filtrlaymiz 
     posts = Post.objects.filter(tags=tag)
 
@@ -66,13 +82,15 @@ def tagged(request, slug):
         'tag':tag,
         'posts':page,
         'common_tags':common_tags,
-        'categories':categories
+        'categories':categories,
+        'all_posts':all_posts
     }
     return render(request, 'blog.html', context)
 
 def categorie(request, id):
     categories = get_object_or_404(Post_categories, pk=id)
     common_tags = Post.tags.most_common()[:12]
+    all_posts = Post.objects.all()[:5]
     
     all_categories = Post_categories.objects.all()
     posts = Post.objects.filter(categorie=categories)
@@ -88,7 +106,8 @@ def categorie(request, id):
     context = {
         'posts':page,
         'common_tags':common_tags,
-        'categories':all_categories
+        'categories':all_categories,
+        'all_posts':all_posts
     }
     return render(request, 'blog.html', context)
 

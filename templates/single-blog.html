@@ -235,8 +235,8 @@
                             </aside>
                             <aside class="single_sidebar_widget popular_post_widget">
                                 <h3 class="widget_title">Popular Posts</h3>
-                                {% if posts %}
-                                    {% for post in posts %}
+                                {% if all_posts %}
+                                    {% for post in all_posts %}
                                 <div class="media post_item">
                                         <img src="{{ post.post_img.url }}" width="100px" alt="post">
                                         <div class="media-body">
