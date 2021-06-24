@@ -114,6 +114,7 @@ def categorie(request, id):
 
 def blog_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
+    all_posts = Post.objects.all()[:5]
     
     categories = Post_categories.objects.all()
     comments = Commit.objects.filter(post=post, reply=None)
@@ -143,6 +144,7 @@ def blog_detail(request, slug):
                                                 'comments':comments,
                                                 'new_comment':new_comment,
                                                 'comment_form':comment_form,
-                                                'categories':categories
+                                                'categories':categories,
+                                                'all_posts':all_posts
                                                 })
 
