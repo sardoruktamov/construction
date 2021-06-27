@@ -10,11 +10,11 @@
 				<div class="container">
 					<div class="banner_content">
 						<div class="page_link">
-							<a href="index.html">Home</a>
-							<a href="blog.html">Blog</a>
-							<a href="single-blog.html">Blog Details</a>
+							<a style="color: #ffffff; text-shadow: 0px 2px 2px red;" href="{% url 'index' %}">Bosh sahifa</a>
+							<a href="blog.html" style="color: #ffffff; text-shadow: 0px 2px 2px red;">Blog</a>
+							<a href="#" style="color: #ffffff; text-shadow: 0px 2px 2px red;">Blog Details</a>
 						</div>
-						<h2>Blog Details</h2>
+						<h2 style="color: #f5204b; text-shadow: 0px 2px 5px white;">Blog Details</h2>
 					</div>
 				</div>
             </div>
@@ -70,7 +70,10 @@
                             <div class="col-lg-12">
                                 <div class="row">
                                     <div class="col-6">
-                                        {% if post.post_img2.url %}<img class="img-fluid" src="{{post.post_img2.url}}" alt="">{% endif %}
+                                        {% if post.post_img2.url %}<img class="img-fluid" src="{{post.post_img2.url}}" alt="">
+                                        {% else %}
+                                        <p>rasm o'rni</p>
+                                        {% endif %}
                                     </div>
                                     <div class="col-6">
                                         {% if post.post_img3.url %}<img class="img-fluid" src="{{post.post_img3.url}}" alt="">{% endif %}
