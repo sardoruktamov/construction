@@ -81,10 +81,10 @@
                                         <ul class="blog_meta list">
                                             <li><a href="#">{{post.author.first_name}} {{post.author.last_name}}<i class="lnr lnr-user"></i></a></li>
                                             <li><a href="#">{{post.date|date:"d M Y"}}<i class="lnr lnr-calendar-full"></i></a></li>
-                                            <li><a href="#">{{ post.post_view }}Views<i class="lnr lnr-eye"></i></a></li>
-                                            <li><a href="#">Comments<i class="lnr lnr-bubble"></i></a></li>
+                                            <li><a href="#">ko'rishlar {{ post.post_view }}<i class="lnr lnr-eye"></i></a></li>
+                                            
                                         </ul>
-                                        <aside >Taglar: 
+                                        <aside >taglar: 
                                             {% for tag in post.tags.all %}
                                                 <a href="{% url 'tagged' tag.slug %}" style="background: rgb(202, 198, 198); color: rgb(0, 0, 0); padding: 3px; ">#{{ tag }}</a>
                                             {% endfor %}
