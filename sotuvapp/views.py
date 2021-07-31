@@ -10,6 +10,8 @@ from django.conf import settings
 from blog_post.models import Post
 from django.views.generic import DetailView, ListView, TemplateView
 from blog_post.models import Post
+
+
 # from django.contrib.auth.models import User
 
 # Create your views here.
@@ -18,43 +20,45 @@ def index(request):
     user = User.objects.all()
     posts = Post.objects.all()
     elonlar = Elon.objects.all()
-    elon = Elon.objects.order_by('-sana','-vaqt')[:3]
+    elon = Elon.objects.order_by('-sana', '-vaqt')[:3]
     context = {
-                'elon':elon,    
-                'user':user,
-                'elonlar':elonlar,
-                'posts':posts
-                }
+        'elon': elon,
+        'user': user,
+        'elonlar': elonlar,
+        'posts': posts
+    }
     return render(request, 'index.html', context)
+
 
 def agents(request):
     users = User.objects.all()
-    return render(request, 'agents.html',{'users':users})
+    return render(request, 'agents.html', {'users': users})
 
-#agentlar bergan elonlarni saralab olish
+
+# agentlar bergan elonlarni saralab olish
 class AgentDetailView(DetailView):
     model = User
     template_name = 'agents_properties.html'
+
     def get(self, request, id):
-        elonlar = Elon.objects.filter(author = id)
+        elonlar = Elon.objects.filter(author=id)
         agent = User.objects.get(pk=id)
 
         elonlar_list = Elon.objects.filter(author=id).order_by('-sana')
-        page = request.GET.get('page',1)
-        paginator = Paginator(elonlar_list,6)
+        page = request.GET.get('page', 1)
+        paginator = Paginator(elonlar_list, 6)
         try:
             announcements = paginator.page(page)
         except PageNotAnInteger:
             announcements = paginator.page(1)
         except EmptyPage:
-            announcements = paginator.page(paginator,num_pages)
-        return render(self.request, self.template_name,{'announcements':announcements})
-
+            announcements = paginator.page(paginator, num_pages)
+        return render(self.request, self.template_name, {'announcements': announcements})
 
 
 @login_required
 def profile(request):
-    if request.method == 'POST':    
+    if request.method == 'POST':
         u_form = UserUpdate(request.POST, instance=request.user)
         p_form = ProfileUpdate(request.POST, request.FILES, instance=request.user.userdetail)
 
@@ -65,7 +69,8 @@ def profile(request):
     else:
         u_form = UserUpdate(instance=request.user)
         p_form = ProfileUpdate(instance=request.user.userdetail)
-    return render(request, 'accounts/profile.html',{'u_form':u_form,'p_form':p_form})
+    return render(request, 'accounts/profile.html', {'u_form': u_form, 'p_form': p_form})
+
 
 @login_required
 def oneannouncement(request, blog_id):
@@ -74,19 +79,20 @@ def oneannouncement(request, blog_id):
 
 
 @login_required
-def edit_announcement(request,blog_id):
+def edit_announcement(request, blog_id):
     elon = get_object_or_404(Elon, pk=blog_id)
     form = ElonlarForm(instance=elon)
-    
+
     if request.method == 'POST':
 
         form = ElonlarForm(request.POST, request.FILES, instance=elon)
-        
+
         if form.is_valid():
             form.save()
             return redirect('/oneannouncement/')
     context = {'form': form}
     return render(request, 'announcement/update.html', context)
+
 
 @login_required
 def delete_announcement(request, blog_id):
@@ -96,11 +102,11 @@ def delete_announcement(request, blog_id):
         return redirect('index')
 
 
-
 @login_required
 def oneannouncement(request, blog_id):
     elon = get_object_or_404(Elon, pk=blog_id)
     return render(request, "announcement/oneannouncement.html", {'elon': elon})
+
 
 # @login_required
 # def edit_announcement(request, blog_id):
@@ -114,14 +120,14 @@ def oneannouncement(request, blog_id):
 #             form.save()
 #             return redirect('/')
 
-def edit_announcement(request,blog_id):
+def edit_announcement(request, blog_id):
     elon = get_object_or_404(Elon, pk=blog_id, author=request.user)
     form = ElonlarForm(instance=elon)
-    
+
     if request.method == 'POST':
 
         form = ElonlarForm(request.POST, request.FILES, instance=elon)
-        
+
         if form.is_valid():
             form.save()
             return redirect('/oneannouncement/')
@@ -134,6 +140,7 @@ def delete_announcement(request, blog_id):
     if request.method == "POST":
         elon.delete()
         return redirect('index')
+
 
 # def add(request):
 #     if request.method == "POST" or request.FILES:
@@ -149,7 +156,7 @@ def delete_announcement(request, blog_id):
 #             rasm3 = request.FILES.getlist('rasm3')
 #             qushimcha = request.POST['qushimcha']
 #             sana = request.POST['sana']
-        
+
 
 #         new_form = ElonlarForm(
 #             rasm1=rasm111, 
@@ -169,7 +176,6 @@ def delete_announcement(request, blog_id):
 #         return render(request, 'agents.html', {'form':ElonlarForm()})
 #     else:
 #         return render(request, 'agents.html', {'form':ElonlarForm()})
-        
 
 
 def about(request):
@@ -177,21 +183,23 @@ def about(request):
     elonlar = Elon.objects.all()
     posts = Post.objects.all()
     context = {
-        'user':user,
-        'elonlar':elonlar,
-        'posts':posts
-        }
+        'user': user,
+        'elonlar': elonlar,
+        'posts': posts
+    }
     return render(request, 'about-us.html', context)
 
+
 def properties(request):
-    elonlar = Elon.objects.all().order_by('-sana','-vaqt')
+    elonlar = Elon.objects.all().order_by('-sana', '-vaqt')
     pgn = Paginator(elonlar, 6)
-    page_nums = request.GET.get('page',1)
+    page_nums = request.GET.get('page', 1)
     try:
         page = pgn.page(page_nums)
     except EmptyPage:
         page = pgn.page(1)
-    return render(request, 'properties.html',{'elonlar':page})
+    return render(request, 'properties.html', {'elonlar': page})
+
 
 def elonFilter(request):
     qs = Elon.objects.all()
@@ -200,10 +208,8 @@ def elonFilter(request):
     return render(request, 'index.uz')
 
 
-
 def elements(request):
     return render(request, 'elements.html')
-
 
 
 def contact(request):
@@ -211,9 +217,8 @@ def contact(request):
 
 
 def base(request):
-
     if request.method == 'POST':
-        email = request.POST['subscribe']        
+        email = request.POST['subscribe']
 
         send_mail(
             'Yangi xabar',
@@ -225,25 +230,25 @@ def base(request):
         subscribed_user = SubscribedUser(email=email)
         subscribed_user.save()
         subscribed = SubscribedUser(email=email)
-        return render(request, 'base.html', {'form':subscribed})
+        return render(request, 'base.html', {'form': subscribed})
     else:
         subscribed = SubscribedUser(email=email)
-        return render(request, 'base.html', {'form':subscribed})
+        return render(request, 'base.html', {'form': subscribed})
 
-#contact qismidan xabar yuborish
+
+# contact qismidan xabar yuborish
 def sendmail(request):
-    
     if request.method == "POST":
-        name       = request.POST['name']
-        email      = request.POST['email']
-        subject    = request.POST['subject']
-        message    = request.POST['message']
-        msg = 'Sizga ***** saytidan '+ name +' xabar yubordi. '+ '\n' + 'elektron pochtasi: ' + email + '\n' + 'xabar maqsadi: '+ subject + '\n' + 'xabar mazmuni: '+'\n'+message
+        name = request.POST['name']
+        email = request.POST['email']
+        subject = request.POST['subject']
+        message = request.POST['message']
+        msg = 'Sizga ***** saytidan ' + name + ' xabar yubordi. ' + '\n' + 'elektron pochtasi: ' + email + '\n' + 'xabar maqsadi: ' + subject + '\n' + 'xabar mazmuni: ' + '\n' + message
         send_mail(
             'Yangi xabar',
             msg,
-            settings.EMAIL_HOST_USER,   #xabar jo`natuvchi elektron pochta
-            ['sardorbek.uktamov.1@mail.ru'], #xabar keluvchi elektron pochta
+            settings.EMAIL_HOST_USER,  # xabar jo`natuvchi elektron pochta
+            ['sardorbek.uktamov.1@mail.ru'],  # xabar keluvchi elektron pochta
             fail_silently=False,
         )
 
@@ -254,9 +259,9 @@ def sendmail(request):
             message=message
         )
         contact_user.save()
-        messages.info(request,"Xabaringiz muvoffaqiyatli yuborildi! Tez orada elektron pochtangizga javob olasiz.")
+        messages.info(request, "Xabaringiz muvoffaqiyatli yuborildi! Tez orada elektron pochtangizga javob olasiz.")
         return redirect('contact')
     else:
-        messages.info(request,"Xabaringiz yuborilmadi! iltimos qaytadan urunib ko'ring. ")
-        
+        messages.info(request, "Xabaringiz yuborilmadi! iltimos qaytadan urunib ko'ring. ")
+
         return redirect('services')
