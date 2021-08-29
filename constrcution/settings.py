@@ -92,15 +92,20 @@ WSGI_APPLICATION = 'constrcution.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'construction',
+#         'USERNAME':'root',
+#         'PASSWORD':'',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'construction',
-        'USERNAME':'root',
-        'PASSWORD':'',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -162,8 +167,9 @@ EMAIL_HOST_USER = "sardorbek.uktamov.3@gmail.com"
 EMAIL_HOST      = 'smtp.gmail.com' 
 EMAIL_PORT      = 587
 EMAIL_USE_TLS   = True
-EMAIL_HOST_PASSWORD = 'S727367#s.'
+EMAIL_HOST_PASSWORD = 'S727367#sns'
 # DEFAULT_FROM_EMAIL = "sardorbek.uktamov.3@gmail.com"
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 #sceditorning qoshimcha tugmalari 0madmin, auth, contenttypes, hitcount, sessions, taggit
 
