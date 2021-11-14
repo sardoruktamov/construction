@@ -1,17 +1,12 @@
 from django.contrib import admin
 from .models import Post, Post_categories, Commit
 
-# Register your models here.
-admin.site.register(Post_categories)
-# admin.site.register(Post)
-# admin.site.register(Commit)
 
-# @admin.register(Post)
-# class PostAdmin(admin.ModelAdmin):
-#     list_display = ['title', 'categorie','date']
-#     prepopulated_fields = {'slug':('title',)}
-    
+# admin.site.register(Post_categories)
 
+@admin.register(Post_categories)
+class Post_categoriesAdmin(admin.ModelAdmin):
+    list_display = ('name',)
 
 @admin.register(Commit)
 class CommitAdmin(admin.ModelAdmin):
