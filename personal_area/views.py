@@ -25,7 +25,7 @@ def index(request, username):
 
 
 @login_required
-def add_announcement(request, username):
+def add_announcement(request):
     if request.user.is_staff:
         metal = Elon.objects.all()
         if request.method == "POST" and request.FILES:

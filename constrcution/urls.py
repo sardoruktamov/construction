@@ -28,7 +28,7 @@ urlpatterns = [
     path('', include('sotuvapp.urls')),
     path('accounts/', include('accounts.urls')),
     path('blogs/', include('blog_post.urls')),
-    path('<username>/', include("personal_area.urls")),
+    path('add-announcement/', include("personal_area.urls")),
     url(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
     url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
 
