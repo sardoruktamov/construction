@@ -82,7 +82,7 @@
 									<a href="#contact" class="nav-link dropdown-toggle active  {% if request.path == elements %} active {% endif %}" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{request.user.username}}</a>
 									<ul class="dropdown-menu  {% if request.path == elements %} active {% endif %}">
                                         {% if request.user.is_staff %}
-                                        <li class="nav-item active"><a class="nav-link" href="../../{{request.user.username}}">mening e'lonlarim</a></li>
+                                        <li class="nav-item active"><a class="nav-link" href="{% url 'personal' %}">mening e'lonlarim</a></li>
 										<li class="nav-item  {% if request.path == elements %} active {% endif %}"><a class="nav-link" href="{% url 'add_announcement' %}">E'lon berish</a></li>
                                         {% comment %} <li class="nav-item active"><a class="nav-link" href="{% url 'post_new' %}">Post qoldirish</a></li> {% endcomment %}
 										{% endif %}

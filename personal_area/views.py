@@ -7,8 +7,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 
 
-def index(request, username):
-    user = User.objects.filter(username=username)
+def index(request):
+    user = User.objects.filter(username=request.user)
     elonlar1 = Elon.objects.filter(author=request.user).order_by('-sana', '-vaqt')
     pgn = Paginator(elonlar1, 6)
     page_nums = request.GET.get('page', 1)
